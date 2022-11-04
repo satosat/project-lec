@@ -12,16 +12,24 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
+
+    {{-- Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    {{-- Global CSS --}}
     <link rel="stylesheet" href="css/global.css">
+
+    {{-- Login CSS --}}
+    <link rel="stylesheet" href="css/login.css">
+
     <title>@yield('title')</title>
 </head>
 
-<body>
-    @include('templates.navbar')
-
+<body class="container">
     @yield('content')
-
-    @include('templates.footer')
 </body>
 
 </html>
