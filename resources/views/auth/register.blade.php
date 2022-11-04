@@ -47,7 +47,7 @@
                 @enderror
             </div>
             <button class="h5 w-100 btn p-2 btn-primary mt-4" type="submit">Register</button>
-            <p class="text-center">Already registered? <a href="/login">Login</a></p>
+            <small class="d-block text-center mt-3">Already registered? <a href="/login">Login</a></small>
         </form>
     </main>
 

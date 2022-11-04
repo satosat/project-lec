@@ -4,7 +4,8 @@
 
 @section('content')
     <main class="form-signin col-6 m-auto">
-        <form>
+        <form action="/login" method="POST">
+            @csrf
             <h1 class="h1 mb-3 fw-medium">Login</h1>
 
             <div class="mb-3">
@@ -21,14 +22,15 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
                     name="password" value="{{ old('password') }}" placeholder="*************" autofocus>
-                @error('email')
+                @error('password')
                     <div class="invalid-feedback">
                        {{ $message }}
                     </div>
                 @enderror
             </div>
             <button class="h5 w-100 btn p-2 btn-primary mt-4" type="submit">Login</button>
-            <p class="text-center">Don't have an account? <a href="/register">Register</a></p>
+            <small class="d-block text-center mt-3">Not registered? <a href="/register">Register</a></small>
+
         </form>
     </main>
 
