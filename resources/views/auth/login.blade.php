@@ -5,7 +5,6 @@
 @section('content')
     <main class="form-signin col-6 m-auto">
         <form>
-
             <h1 class="h1 mb-3 fw-medium">Login</h1>
 
             <div class="mb-3">
@@ -28,7 +27,7 @@
                     </div>
                 @enderror
             </div>
-            <button class="h5 w-100 btn btn-lg btn-primary mt-4" type="submit">Sign in</button>
+            <button class="h5 w-100 btn p-2 btn-primary mt-4" type="submit">Login</button>
             <p class="text-center">Don't have an account? <a href="/register">Register</a></p>
         </form>
     </main>
