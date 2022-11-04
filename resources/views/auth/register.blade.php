@@ -5,6 +5,7 @@
 @section('content')
     <main class="form-signin col-6 m-auto">
         <form>
+            @csrf
             <h1 class="h1 mb-3 fw-medium">Register</h1>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>

@@ -7,26 +7,23 @@
         <form action="/login" method="POST">
             @csrf
             <h1 class="h1 mb-3 fw-medium">Login</h1>
+            @if (session()->has('loginError'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <small>
+                        {{ session('loginError') }}
+                    </small>
+                </div>
+            @endif
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                    name="email" value="{{ old('email') }}" placeholder="example@gmail.com" autofocus>
-                @error('email')
-                    <div class="invalid-feedback">
-                       {{ $message }}
-                    </div>
-                @enderror
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}"
+                    placeholder="example@gmail.com" autofocus required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                    name="password" value="{{ old('password') }}" placeholder="*************" autofocus>
-                @error('password')
-                    <div class="invalid-feedback">
-                       {{ $message }}
-                    </div>
-                @enderror
+                <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}"
+                    placeholder="*************" autofocus required>
             </div>
             <button class="h5 w-100 btn p-2 btn-primary mt-4" type="submit">Login</button>
             <small class="d-block text-center mt-3">Not registered? <a href="/register">Register</a></small>

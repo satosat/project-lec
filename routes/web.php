@@ -13,4 +13,4 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 
 // bawah ini jangan dihapus yaa
-require __DIR__ . '/auth.php';
+// require __DIR__ . '/auth.php';
