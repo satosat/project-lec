@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Books;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -13,7 +14,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('books.index', [
+            'books' => Books::all()
+        ]);
     }
 
     /**
