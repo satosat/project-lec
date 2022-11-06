@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Books;
+use App\Models\Book;
 use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BooksSeeder extends Seeder
@@ -19,7 +18,7 @@ class BooksSeeder extends Seeder
         $faker = Factory::create();
 
         for ($i = 0; $i < 20; $i++) {
-            Books::create([
+            Book::create([
                 'title' => $faker->words(3, true),
                 'author' => $faker->name()
             ]);
