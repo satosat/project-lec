@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Books;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
         return view('books.index', [
-            'books' => Books::all()
+            'books' => Book::paginate(8)
         ]);
     }
 
@@ -48,7 +48,9 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('books.show', [
+            'book' => Book::findOrFail($id),
+        ]);
     }
 
     /**
