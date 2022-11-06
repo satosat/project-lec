@@ -1,12 +1,12 @@
 @extends('templates.master')
 
-@yield('title', 'history')
+@yield('title', 'History')
 
 @section('content')
     <div>
         <table class="table">
             <thead>
-                <th scope="col">User ID</th>
+                <th scope="col">Transaction ID</th>
                 <th scope="col">Book ID</th>
                 <th scope="col">Price</th>
             </thead>
@@ -14,7 +14,7 @@
                 <tr>
                     @foreach ($transactions as $t)
                     <tr>
-                        <td>{{ $t->user_id }}</td>
+                        <td>{{ $t->id }}</td>
                         <td>{{ $t->book_id }}</td>
                         <td>{{ $t->price }}</td>
                     </tr>
