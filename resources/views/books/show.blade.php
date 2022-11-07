@@ -25,13 +25,12 @@
                 </form>
 
                 @if ($book->detail->stock != 0)
-                    <button type="button" class="btn btn-success w-100">
-                        <a href="{{ route('checkout', ['id' => $book->id]) }}" class="text-decoration-none text-white">
-                            Checkout
-                        </a>
+                    <button type="button" class="btn btn-success w-100" data-bs-toggle="modal"
+                        data-bs-target="#checkoutModal">
+                        Checkout
                     </button>
                 @else
-                    <button type="button" class="btn btn-danger" disabled>Checkout</button>
+                    <button type="button" class="btn btn-danger w-100" disabled>Checkout</button>
                 @endif
             </div>
 
@@ -46,6 +45,29 @@
                 </form>
             @endcan
 
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="checkoutModalLabel">Confirm Checkout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to checkout?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="{{ route('checkout') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="book_id" id="book_id" value="{{ $book->id }}">
+                            <input type="submit" class="btn btn-primary" value="Checkout">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
