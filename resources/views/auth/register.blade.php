@@ -1,64 +1,55 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.authentication')
 
-        <form method="POST" action="{{ route('register') }}">
+@section('title', 'Register')
+
+@section('content')
+    <main class="form-signin col-6 m-auto">
+        <form action="/register" method="POST" autocomplete="chrome-off">
             @csrf
-
-            <!-- Name -->
-            <div>
-                <x-input-label for="name" :value="__('Name')" />
-
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <h1 class="h1 mb-3 fw-medium">Register</h1>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                    name="email" value="{{ old('email') }}" placeholder="example@gmail.com" autofocus>
+                @error('email')
+                    <div class="invalid-feedback">
+                       {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                    name="name" value="{{ old('name') }}" placeholder="John Doe">
+                @error('name')
+                    <div class="invalid-feedback">
+                       {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
+                    name="username" value="{{ old('username') }}" placeholder="john123">
+                @error('username')
+                    <div class="invalid-feedback">
+                       {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
+                    name="password" value="" placeholder="*************">
+                @error('password')
+                    <div class="invalid-feedback">
+                       {{ $message }}
+                    </div>
+                @enderror
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-primary-button class="ml-4">
-                    {{ __('Register') }}
-                </x-primary-button>
-            </div>
+            <button class="h5 w-100 btn p-2 btn-primary mt-4" type="submit">Register</button>
+            <small class="d-block text-center mt-3">Already registered? <a href="/login">Login</a></small>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    </main>
+
+@endsection
