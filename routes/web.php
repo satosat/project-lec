@@ -25,7 +25,7 @@ Route::get('/history', [TransactionController::class, 'index'])->middleware('aut
 Route::get('/readingList', [BookmarkController::class, 'index'])->middleware('auth');
 
 
-Route::redirect('/', '/books');
+Route::redirect('/', '/books')->middleware('auth');
 
 Route::get('/books', [BookController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('show book')->middleware('auth');
@@ -35,15 +35,10 @@ Route::get('/checkout/{id}', [TransactionController::class, 'show'])->name('chec
 
 
 // Login
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
-
-
-
-// bawah ini jangan dihapus yaa
-// require __DIR__ . '/auth.php';
