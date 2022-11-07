@@ -6,8 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Books extends Model
+class Book extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    /**
+     * Get the detail associated with the book
+     */
+    public function detail()
+    {
+        return $this->hasOne(BookDetail::class);
+    }
 }

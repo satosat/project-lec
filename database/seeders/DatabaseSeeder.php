@@ -16,19 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        User::create([
-            'username' => 'aradhanaid',
-            'name' => 'Aradhana Indra Daniswara',
-            'email' => 'aradhana.indra@binus.ac.id',
-            'password' => bcrypt('example123'),
-            'is_admin' => true
+        $this->call([
+            BooksSeeder::class,
+            BookDetailsSeeder::class,
         ]);
     }
 }
