@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +48,14 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $book = Book::findOrFail($id);
+
+        // Abort if stock is zero (illegal route)
+        if (!$book->detail->stock) {
+            abort(404);
+        }
+
+        return $book->detail->stock;
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -13,7 +16,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('books.index', [
+            'books' => Book::paginate(8)
+        ]);
     }
 
     /**
@@ -34,7 +39,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +50,13 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('books.show', [
+            'book' => Book::findOrFail($id),
+            'bookmarked' => Bookmark::where([
+                ['user_id', Auth::id()],
+                ['book_id', $id]
+            ])->get(),
+        ]);
     }
 
     /**
@@ -79,6 +90,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::destroy($id);
+
+        return redirect(route('home'));
     }
 }
