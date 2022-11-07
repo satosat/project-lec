@@ -22,7 +22,10 @@ Route::get('/admin-edit', function () {
 });
 
 Route::get('/history', [TransactionController::class, 'index']);
+
+// Bookmarks
 Route::get('/readingList', [BookmarkController::class, 'index']);
+Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('addBookmark');
 
 
 Route::redirect('/', '/books');
@@ -42,8 +45,3 @@ Route::post('/logout', [LoginController::class, 'logout']);
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
-
-
-
-// bawah ini jangan dihapus yaa
-// require __DIR__ . '/auth.php';
