@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Book;
+use App\Models\BookDetail;
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +17,19 @@ class BookDetailsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $faker = Factory::create();
+
+        $books = Book::all();
+
+        foreach ($books as $book) {
+            BookDetail::create([
+                'book_id' => $book->id,
+                'description' => $faker->paragraph(5),
+                'length' => $faker->numberBetween(2, 1000),
+                'publisher' => $faker->words(3, true),
+                'stock' => $faker->numberBetween(0, 1000),
+                'price' => $faker->numberBetween(1000, 1000000),
+            ]);
+        }
     }
 }
