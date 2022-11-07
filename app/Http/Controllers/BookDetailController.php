@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookDetailController extends Controller
 {
@@ -32,9 +33,18 @@ class BookDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addBook(Request $request)
     {
-        //
+        DB::table('book_details')->insert([
+            'title'=>$request->title,
+            'publisher'=>$request->publisher,
+            'length'=>$request->length,
+            'stock'=>$request->stock,
+            'price'=>$request->price,
+            'description'=>$request->description
+        ]);
+
+        return redirect()->back();
     }
 
     /**

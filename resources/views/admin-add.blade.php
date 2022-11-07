@@ -7,12 +7,13 @@
         <h4>Add Book</h4>
     </div>
 
-    <form action="" method="POST" class="d-flex justify-content-around my-5 ">
-        <div class="form-group align-self-center">
+    <form action="{{ route('addBook') }}" method="POST" class="d-flex justify-content-around my-5 ">
+        @csrf
+        {{-- <div class="form-group align-self-center">
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="">
             </div>
-        </div>
+        </div> --}}
 
         <div class="form-group p-2">
             <div class="row m-2 p-2">
@@ -20,7 +21,7 @@
                     <label for="">Book Title</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="" placeholder="Book Title">
+                    <input type="text" name="title" class="form-control" id="" placeholder="Book Title">
                 </div>
             </div>
 
@@ -29,7 +30,7 @@
                     <label for="">Publisher</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="" placeholder="Publisher">
+                    <input type="text" name="publisher" class="form-control" id="" placeholder="Publisher">
                 </div>
             </div>
 
@@ -38,7 +39,7 @@
                     <label for="">Length</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="number" class="form-control" id="" placeholder="Length">
+                    <input type="number" name="length" class="form-control" id="" placeholder="Length">
                 </div>
             </div>
 
@@ -47,7 +48,16 @@
                     <label for="">Stock</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="number" class="form-control" id="" placeholder="Stock">
+                    <input type="number" name="stock" class="form-control" id="" placeholder="Stock">
+                </div>
+            </div>
+
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-center">
+                    <label for="">Price</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" name="price" class="form-control" id="" placeholder="Rp ">
                 </div>
             </div>
 
@@ -56,11 +66,11 @@
                     <label for="">Description</label>
                 </div>
                 <div class="col-md-9">
-                   <textarea class="form-control" id="" cols="30" rows="5"></textarea>
+                   <textarea class="form-control" name="description" id="" cols="30" rows="5"></textarea>
                 </div>
             </div>
             
-            <button type="submit" class="col-4 mx-4 mt-sm-4 mb-sm-4 btn btn-primary">Submit</button>
+            <button type="submit" class="col-10 mx-5 mt-sm-4 mb-sm-4 btn btn-primary">Submit</button>
         </div>
     </form>
 @endsection
