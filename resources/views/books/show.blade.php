@@ -36,14 +36,15 @@
             </div>
 
             {{-- Admin only --}}
-            <form action="{{ route('delete book', ['id' => $book->id]) }}" method="POST" class="mt-5">
-                @csrf
-                @method('delete')
+            @can('admin')
+                <form action="{{ route('delete book', ['id' => $book->id]) }}" method="POST" class="mt-5">
+                    @csrf
+                    @method('delete')
 
-                <input type="text" name="book_id" id="book_id" hidden value="{{ $book->id }}">
-                <label for="">((pake middleware nanti))</label>
-                <button type="submit" class="btn btn-danger w-100">Delete Book</button>
-            </form>
+                    <input type="text" name="book_id" id="book_id" hidden value="{{ $book->id }}">
+                    <button type="submit" class="btn btn-danger w-100">Delete Book</button>
+                </form>
+            @endcan
 
         </div>
     </div>
