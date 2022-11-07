@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('book_details', function (Blueprint $table) {
             $table->unsignedBigInteger('book_id');
-            $table->string('title');
             $table->string('description', 512);
             $table->integer('length');
             $table->string('publisher');
