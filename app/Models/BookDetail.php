@@ -11,7 +11,7 @@ class BookDetail extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable=[
+    protected $fillable = [
         'book_id',
         'title',
         'description',
@@ -20,7 +20,6 @@ class BookDetail extends Model
         'stock',
         'price',
     ];
-
 
     public $timestamps = false;
 
@@ -31,5 +30,4 @@ class BookDetail extends Model
     {
         return $this->belongsTo(Book::class);
     }
-
 }

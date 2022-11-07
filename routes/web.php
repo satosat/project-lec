@@ -2,10 +2,11 @@
 
 
 use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\TransactionController;
-
-
 use App\Http\Controllers\BookDetailController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +24,6 @@ Route::get('/admin-edit', function () {
 Route::get('/history', [TransactionController::class, 'index']);
 Route::get('/readingList', [BookmarkController::class, 'index']);
 
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-
-use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/books');
 
