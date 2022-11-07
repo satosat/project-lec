@@ -29,8 +29,8 @@ Route::get('/readingList', [BookmarkController::class, 'index'])->middleware('au
 Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('addBookmark')->middleware('auth');
 
 
-// Book
-Route::redirect('/', '/books');
+Route::redirect('/', '/books')->middleware('auth');
+
 Route::get('/books', [BookController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('show book')->middleware('auth');
 Route::delete('/books/{id}', [BookController::class, 'delete'])->name('delete book')->middleware('auth');
@@ -38,8 +38,8 @@ Route::delete('/books/{id}', [BookController::class, 'delete'])->name('delete bo
 
 
 // Login
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // Register
