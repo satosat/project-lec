@@ -17,10 +17,11 @@
             <p>Stock: {{ $book->detail->stock }}</p>
 
             <div class="d-flex justify-content-between">
-                <form action="" method="POST" id="bookmarkForm" class="w-100 me-3">
-                    <button type="submit" class="btn btn-primary w-100" id="bookmarkBtn">
-                        Remove from Bookmark
-                    </button>
+                <form action="{{ route('addBookmark') }}" method="POST" id="bookmarkForm" class="w-100 me-3">
+                    @csrf
+                    <input type="hidden" name="book_id" id="book_id" value="{{ $book->id }}">
+                    <input type="submit" class="btn btn-primary w-100" id="bookmarkBtn"
+                        value="{{ $bookmarked }}"></input>
                 </form>
 
                 @if ($book->detail->stock != 0)

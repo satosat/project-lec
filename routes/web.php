@@ -21,8 +21,11 @@ Route::get('/admin-edit', function () {
     return view('admin-edit');
 })->middleware('admin');
 
+
 Route::get('/history', [TransactionController::class, 'index'])->middleware('auth');
 Route::get('/readingList', [BookmarkController::class, 'index'])->middleware('auth');
+Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('addBookmark')->middleware('auth');
+
 
 
 Route::redirect('/', '/books')->middleware('auth');
