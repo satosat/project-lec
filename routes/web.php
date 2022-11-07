@@ -1,7 +1,12 @@
 <?php
 
 
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\TransactionController;
+
+
 use App\Http\Controllers\BookDetailController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin-add', function () {
@@ -15,6 +20,8 @@ Route::get('/admin-edit', function () {
     return view('admin-edit');
 });
 
+Route::get('/history', [TransactionController::class, 'index']);
+Route::get('/readingList', [BookmarkController::class, 'index']);
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;

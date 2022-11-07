@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookmarkController extends Controller
 {
@@ -13,7 +14,8 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        //
+        $bookmarks = DB::table('bookmarks')->join('books', 'bookmarks.book_id',	'=', 'books.id')->join('book_details', 'bookmarks.book_id', '=', 'book_details.book_id')->get();
+        return view('readingList.index', compact('bookmarks'));
     }
 
     /**
