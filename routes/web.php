@@ -7,7 +7,6 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin-add', function () {
@@ -21,20 +20,21 @@ Route::get('/admin-edit', function () {
     return view('admin-edit');
 })->middleware('admin');
 
+// Transaction
+Route::get('/history', [TransactionController::class, 'index'])->middleware('auth')->name('history');
+Route::post('/checkout', [TransactionController::class, 'store'])->name('checkout');
 
-Route::get('/history', [TransactionController::class, 'index'])->middleware('auth');
+// Bookmark
 Route::get('/readingList', [BookmarkController::class, 'index'])->middleware('auth');
 Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('addBookmark')->middleware('auth');
 
 
-
+// Book
 Route::redirect('/', '/books');
-
 Route::get('/books', [BookController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('show book')->middleware('auth');
 Route::delete('/books/{id}', [BookController::class, 'delete'])->name('delete book')->middleware('auth');
 
-Route::get('/checkout/{id}', [TransactionController::class, 'show'])->name('checkout')->middleware('auth');
 
 
 // Login
@@ -45,4 +45,3 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
-
