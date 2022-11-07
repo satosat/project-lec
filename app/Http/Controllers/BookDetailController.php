@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,10 @@ class BookDetailController extends Controller
      */
     public function index()
     {
-        //
+        $book_details = DB::table('book_details');
+        $book_details = $book_details->join('book', 'book.id', '=', 'book_details.id')->get();
+
+        return view('admin-add');
     }
 
     /**
@@ -36,7 +40,9 @@ class BookDetailController extends Controller
     public function addBook(Request $request)
     {
         DB::table('book_details')->insert([
+            'book_id'=>$request->book_id,
             'title'=>$request->title,
+            //'author'=>$request->author,
             'publisher'=>$request->publisher,
             'length'=>$request->length,
             'stock'=>$request->stock,
@@ -66,7 +72,7 @@ class BookDetailController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**
@@ -78,7 +84,17 @@ class BookDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('book_details')->where('book_id', $request->book_id)->update([
+            'title'=>$request->title,
+            'author'=>$request->author,
+            'publisher'=>$request->publisher,
+            'length'=>$request->length,
+            'stock'=>$request->stock,
+            'price'=>$request->price,
+            'description'=>$request->description
+        ]);
+
+        return redirect('/books');
     }
 
     /**

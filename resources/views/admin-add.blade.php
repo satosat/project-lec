@@ -36,6 +36,15 @@
 
             <div class="row m-2 p-2">
                 <div class="col-sm-3 align-self-center">
+                    <label for="">Author</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="author" class="form-control" id="" placeholder="Author">
+                </div>
+            </div>
+
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-center">
                     <label for="">Length</label>
                 </div>
                 <div class="col-md-9">

@@ -7,7 +7,8 @@
         <h4>Edit Book</h4>
     </div>
 
-    <form action="" method="POST" class="d-flex justify-content-around my-5 ">
+    <form action="{{ route('editBook') }}" method="POST" class="d-flex justify-content-around my-5 ">
+        {{ method_field('PUT') }}
         @csrf
         {{-- <div class="form-group align-self-center">
             <div class="custom-file">

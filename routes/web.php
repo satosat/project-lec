@@ -10,11 +10,10 @@ use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin-add', function () {
-    return view('admin-add');
-});
 
+Route::get('/admin-add', [BookDetailController::class, 'index']);
 Route::post('/admin-add', [BookDetailController::class, 'addBook'])->name('addBook');
+Route::put('/admin-edit', [BookDetailController::class, 'editBook'])->name('editBook');
 
 
 Route::get('/admin-edit', function () {
