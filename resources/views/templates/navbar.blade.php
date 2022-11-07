@@ -17,7 +17,7 @@
                     <p class="my-auto">Hello, {{ Auth::user()->name }}</p>
                     @can('admin')
                         <a class="nav-link p-0" href="/admin-add">
-                            <button type="button" class="btn btn-primary">AddBooks</button>
+                            <button type="button" class="btn btn-primary">Add Books</button>
                         </a>
                     @endcan
                     <button class="btn btn-link text-reset text-decoration-none p-0" type="submit">Sign Out<i
