@@ -11,6 +11,8 @@ class Book extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['title','author'];
+
     /**
      * Get the detail associated with the book
      */

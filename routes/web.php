@@ -10,15 +10,12 @@ use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/admin', [BookController::class, 'index'])->name('addBook');
+Route::post('/admin', [BookController::class, 'store']);
+Route::get('/detail', [BookDetailController::class, 'index'])->name('addBookDetail');
+Route::post('/detail', [BookDetailController::class, 'store']);
 
-Route::get('/admin-add', [BookDetailController::class, 'index']);
-Route::post('/admin-add', [BookDetailController::class, 'addBook'])->name('addBook');
-Route::put('/admin-edit', [BookDetailController::class, 'editBook'])->name('editBook');
-
-
-Route::get('/admin-edit', function () {
-    return view('admin-edit');
-});
+//Route::put('/update/{id}', [BookDetailController::class, 'update'])->name('update');
 
 Route::get('/history', [TransactionController::class, 'index']);
 Route::get('/readingList', [BookmarkController::class, 'index']);

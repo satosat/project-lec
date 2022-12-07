@@ -15,10 +15,8 @@ class BookDetailController extends Controller
      */
     public function index()
     {
-        $book_details = DB::table('book_details');
-        $book_details = $book_details->join('book', 'book.id', '=', 'book_details.id')->get();
-
-        return view('admin-add');
+        $book = DB::table('books')->get();
+        return view('admin.detail.index');
     }
 
     /**
@@ -37,20 +35,17 @@ class BookDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addBook(Request $request)
+    public function store(Request $request)
     {
-        DB::table('book_details')->insert([
-            'book_id'=>$request->book_id,
-            'title'=>$request->title,
-            //'author'=>$request->author,
-            'publisher'=>$request->publisher,
+        BookDetail::insert([
+            'description'=>$request->description,
             'length'=>$request->length,
+            'publisher'=>$request->publisher,
             'stock'=>$request->stock,
-            'price'=>$request->price,
-            'description'=>$request->description
+            'price'=>$request->price
         ]);
 
-        return redirect()->back();
+        return redirect(route('show book'));
     }
 
     /**
@@ -72,7 +67,8 @@ class BookDetailController extends Controller
      */
     public function edit($id)
     {
-       
+        $bookDetail = BookDetail::where('id', $id)->get();
+        return view('admin.dedtail.update', ['bookDetails'=> $bookDetail]);
     }
 
     /**
@@ -84,17 +80,15 @@ class BookDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('book_details')->where('book_id', $request->book_id)->update([
-            'title'=>$request->title,
-            'author'=>$request->author,
-            'publisher'=>$request->publisher,
+        BookDetail::where('book_id', $request->book_id)->update([
+            'description'=>$request->description,
             'length'=>$request->length,
+            'publisher'=>$request->publisher,
             'stock'=>$request->stock,
-            'price'=>$request->price,
-            'description'=>$request->description
+            'price'=>$request->price
         ]);
 
-        return redirect('/books');
+        return redirect(route('show book'));
     }
 
     /**

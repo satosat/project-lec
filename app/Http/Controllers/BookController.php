@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class BookController extends Controller
 {
@@ -39,7 +41,12 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        
+        Book::insert([
+            'title'=>$request->title,
+            'author'=>$request->author
+        ]);
+
+        return redirect(route('home'));
     }
 
     /**
@@ -67,7 +74,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::where('id', $id)->get();
+        return view('admin.dedtail.update', ['books'=> $book]);
     }
 
     /**
@@ -79,7 +87,12 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Book::where('id', $request->id)->update([
+            'title' => $request->title,
+            'author' => $request->author,
+        ]);
+
+        return redirect(route('home'));
     }
 
     /**
