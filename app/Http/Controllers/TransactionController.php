@@ -22,7 +22,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = DB::table('transactions')->get();
+        $transactions = DB::table('transactions')
+            ->where('user_id', auth()::id())
+            ->get();
         return view('history.index', compact('transactions'));
     }
 
