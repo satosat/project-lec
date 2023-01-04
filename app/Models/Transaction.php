@@ -14,4 +14,9 @@ class Transaction extends Model
         'book_id',
         'price',
     ];
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

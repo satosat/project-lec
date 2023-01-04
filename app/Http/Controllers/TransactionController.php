@@ -22,9 +22,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = DB::table('transactions')
-            ->where('user_id', auth()::id())
-            ->get();
+        $transactions = Transaction::where('user_id', Auth::id())->get();
+
         return view('history.index', compact('transactions'));
     }
 
@@ -36,11 +35,9 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->book_id);
         $request->validate([
             'book_id' => ['required', 'numeric', 'min:0'],
         ]);
-
 
         // Check if book exist
         $book = Book::findOrFail($request->book_id);
@@ -56,16 +53,5 @@ class TransactionController extends Controller
         ]);
 
         return redirect(route('history'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 }

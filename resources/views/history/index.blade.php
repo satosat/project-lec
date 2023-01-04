@@ -1,28 +1,26 @@
 @extends('templates.master')
 
-@yield('title', 'History')
+@section('title', 'History')
 
 @section('content')
-    <div>
+    <div class="container">
         <table class="table">
             <thead>
-                <th scope="col">Transaction ID</th>
+                <th class="col">No.</th>
+                <th scope="col">Transaction Date</th>
                 <th scope="col">Book ID</th>
                 <th scope="col">Price</th>
             </thead>
             <tbody>
-                <tr>
-                    @foreach ($transactions as $t)
+                @foreach ($transactions as $transaction)
                     <tr>
-                        <td>{{ $t->id }}</td>
-                        <td>{{ $t->book_id }}</td>
-                        <td>{{ $t->price }}</td>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ date('j M Y', strtotime($transaction->created_at)) }}</td>
+                        <td>{{ $transaction->book->title }}</td>
+                        <td>Rp{{ number_format($transaction->price, 2, ',', '.') }}</td>
                     </tr>
-                    @endforeach
-
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
-
 @endsection
