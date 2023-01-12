@@ -46,7 +46,7 @@ class BookController extends Controller
             'author'=>$request->author
         ]);
 
-        return redirect(route('home'));
+        return redirect('admin.detail.index');
     }
 
     /**
@@ -74,8 +74,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book = Book::where('id', $id)->get();
-        return view('admin.dedtail.update', ['books'=> $book]);
+        
     }
 
     /**
@@ -87,12 +86,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Book::where('id', $request->id)->update([
-            'title' => $request->title,
-            'author' => $request->author,
-        ]);
-
-        return redirect(route('home'));
+        
     }
 
     /**

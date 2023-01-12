@@ -10,16 +10,14 @@ use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin', [BookController::class, 'index'])->name('addBook');
-Route::post('/admin', [BookController::class, 'store']);
-Route::get('/detail', [BookDetailController::class, 'index'])->name('addBookDetail');
-Route::post('/detail', [BookDetailController::class, 'store']);
+Route::get('/addDetail', [BookDetailController::class, 'index']);
+Route::post('/addDetail', [BookDetailController::class, 'store'])->name('addBookDetail');
 
-//Route::put('/update/{id}', [BookDetailController::class, 'update'])->name('update');
+Route::get('/updateDetail/{id}', [BookDetailController::class, 'update']);
+Route::put('/updateDetail/{id}', [BookDetailController::class, 'update'])->name('updateDetail');
 
 Route::get('/history', [TransactionController::class, 'index']);
 Route::get('/readingList', [BookmarkController::class, 'index']);
-
 
 Route::redirect('/', '/books');
 
@@ -38,7 +36,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
-
 
 
 // bawah ini jangan dihapus yaa

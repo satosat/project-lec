@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('publisher');
             $table->integer('stock');
             $table->integer('price');
+            $table->string('images');
 
             $table->softDeletes();
 
