@@ -9,6 +9,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/addDetail', [BookDetailController::class, 'index']);
+Route::post('/addDetail', [BookDetailController::class, 'store'])->name('addBookDetail');
+
+Route::get('/updateDetail/{id}', [BookDetailController::class, 'update']);
+Route::put('/updateDetail/{id}', [BookDetailController::class, 'update'])->name('updateDetail');
+
 Route::get('/admin-add', function () {
     return view('admin-add');
 })->middleware('admin');
@@ -29,7 +36,8 @@ Route::get('/readingList', [BookmarkController::class, 'index'])->middleware('au
 Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('addBookmark')->middleware('auth');
 
 
-Route::redirect('/', '/books')->middleware('auth');
+Route::redirect('/', '/books');
+
 
 Route::get('/books', [BookController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/books/{id}', [BookController::class, 'show'])->name('show book')->middleware('auth');
@@ -45,3 +53,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+

@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class BookController extends Controller
 {
@@ -44,6 +46,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
     }
 
     /**
@@ -79,7 +82,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -91,7 +94,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
