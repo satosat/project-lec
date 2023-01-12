@@ -9,7 +9,7 @@
             {{-- Individual book card --}}
             @foreach ($books as $book)
                 <div class="card mb-5" style="width: 18rem; padding: 0">
-                    <img src="{{ url('images/img.jpg') }}" class="card-img-top" alt="">
+                    <img src="{{ url('images/'.rand(1,6).'.png') }}" class="card-img-top" alt="">
                     <div class="card-body" style="margin-left: 1rem; margin-right: 1rem">
                         <h5 class="card-title" style="height: 3rem">{{ $book->title }}</h5>
                         <p class="card-text">By {{ $book->author }}</p>

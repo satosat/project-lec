@@ -80,7 +80,7 @@ class BookDetailController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -131,5 +131,5 @@ class BookDetailController extends Controller
     public function destroy($id)
     {
         //
-    } 
+    }
 }
