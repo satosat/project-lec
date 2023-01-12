@@ -10,11 +10,6 @@
     <form action="{{ route('addBook') }}" method="POST" enctype="multipart/form-data"
         class="d-flex justify-content-around my-5 ">
         @csrf
-        {{-- <div class="form-group align-self-start mt-2">
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="">
-            </div>
-        </div> --}}
 
         <div class="form-group p-2">
             <div class="row m-2 p-2">
@@ -29,6 +24,17 @@
                 </div>
             </div>
 
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Author</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="author" class="form-control" id="" placeholder="Author">
+                    @error('author')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
+            </div>
             <div class="row m-2 p-2">
                 <div class="col-sm-3 align-self-start mt-2">
                     <label for="">Publisher</label>
@@ -105,8 +111,8 @@
                     <label for="">Book Cover</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="file" name="book cover" class="form-control" id="" placeholder="Rp ">
-                    @error('book cover')
+                    <input type="file" name="book_cover" class="form-control" id="" placeholder="Rp ">
+                    @error('book_cover')
                         <p class="text-danger mb-0"><small>{{ $message }}</small></p>
                     @enderror
                     <p>

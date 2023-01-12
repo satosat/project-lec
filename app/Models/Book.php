@@ -25,4 +25,9 @@ class Book extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function bookmark()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 }

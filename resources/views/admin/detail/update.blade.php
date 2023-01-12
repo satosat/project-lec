@@ -6,85 +6,131 @@
     <div class="title-admin text-center my-3">
         <h4>Edit Book</h4>
     </div>
- 
-    <form enctype="multipart/form-data" action="/updateDetail/{{ $p->id }}" method="POST" class="my-1 mx-1">
+
+    <form enctype="multipart/form-data" action="/updateDetail/{{ $book->id }}" method="POST" class="d-flex justify-content-around my-5">
         @method('PUT')
         @csrf
 
-        <div class="form-group p-2 ">
-            <div class="row m-2 p-2 ">
-                <div class="col-sm-2 align-self-center">
-                    <label for="">Title</label>
+        <div class="form-group p-2">
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Book Title</label>
                 </div>
-                <div class="col-md-5">
-                    <input type="text" name="title" class="form-control" placeholder="Title">
+                <div class="col-md-9">
+                    <input type="text" name="title" class="form-control" id="" placeholder="Book Title" value="{{ $book->title }}">
+                    @error('title')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
                 </div>
             </div>
 
             <div class="row m-2 p-2">
-                <div class="col-sm-2 align-self-center">
+                <div class="col-sm-3 align-self-start mt-2">
                     <label for="">Author</label>
                 </div>
-                <div class="col-md-5">
-                    <input type="text" name="author" class="form-control" placeholder="Author">
+                <div class="col-md-9">
+                    <input type="text" name="author" class="form-control" id="" placeholder="Author" value="{{ $book->author }}">
+                    @error('author')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
                 </div>
             </div>
-        </div>
-        
-        <div class="row m-2 p-2">
-            <div class="col-sm-2 align-self-center">
-                <label for="">Publisher</label>
-            </div>
-            <div class="col-md-5">
-                <input type="text" name="publisher" class="form-control" id="" value="{{ $p->publisher }}">
-            </div>
-        </div>
 
-        <div class="row m-2 p-2">
-            <div class="col-sm-2 align-self-center">
-                <label for="">Length</label>
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Publisher</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="publisher" class="form-control" id="" placeholder="Publisher" value="{{ $book->detail->publisher}}">
+                    @error('publisher')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
-            <div class="col-md-5">
-                <input type="number" name="length" class="form-control" id="" value="{{ $p->length }}">
-            </div>
-        </div>
 
-        <div class="row m-2 p-2">
-            <div class="col-sm-2 align-self-center">
-                <label for="">Stock</label>
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">ISBN</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="isbn" class="form-control" id="" placeholder="ISBN" value="{{ $book->detail->isbn }}">
+                    @error('isbn')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
-            <div class="col-md-5">
-                <input type="number" name="stock" class="form-control" id="" value="{{ $p->stock }}">
-            </div>
-        </div>
 
-        <div class="row m-2 p-2">
-            <div class="col-sm-2 align-self-center">
-                <label for="">Price</label>
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Length</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" name="length" class="form-control" id="" placeholder="Length" value="{{ $book->detail->length }}">
+                    @error('length')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
-            <div class="col-md-5">
-                <input type="number" name="price" class="form-control" id="" value="{{ $p->price }}">
-            </div>
-        </div>
 
-        <div class="row m-2 p-2">
-            <div class="col-sm-2 align-self-start">
-                <label for="">Description</label>
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Stock</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" name="stock" class="form-control" id="" placeholder="Stock" value="{{ $book->detail->stock }}">
+                    @error('stock')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
-            <div class="col-md-5">
-               <textarea class="form-control" name="description" id="" cols="30" rows="5"></textarea>
-            </div>
-        </div>
 
-        <div class="row m-2 p-2">
-            <div class="col-2 align-self-start">
-                <label for="">Image</label>
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Price</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" name="price" class="form-control" id="" placeholder="Rp " value="{{ $book->detail->price }}">
+                    @error('price')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
-            <div class="col-4">
-                <input type="file" class="form-control" id="" name="images" value="{{ $p->images }}"> 
+
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Description</label>
+                </div>
+                <div class="col-md-9">
+                    <textarea class="form-control" name="description" id="" cols="30" rows="5">{{ $book->detail->description }}</textarea>
+                    @error('description')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                </div>
             </div>
+
+            <div class="w-25">
+                <img src="{{ asset('storage/book_images/' . $book->detail->images) }}" alt="">
+            </div>
+
+            <div class="row m-2 p-2">
+                <div class="col-sm-3 align-self-start mt-2">
+                    <label for="">Book Cover</label>
+                </div>
+
+                <div class="col-md-9">
+                    <input type="file" name="book_cover" class="form-control" id="" placeholder="Rp ">
+                    @error('book_cover')
+                        <p class="text-danger mb-0"><small>{{ $message }}</small></p>
+                    @enderror
+                    <p>
+                        <small class="text-muted">
+                            Book cover should have a resoultion of 600 x 600 pixels for the best result
+                        </small>
+                    </p>
+                </div>
+            </div>
+
+            <button type="submit" class="col-10 mx-5 mt-sm-4 mb-sm-4 btn btn-success">Save</button>
         </div>
-        
-        <button type="submit" class="btn btn-primary mx-4 my-4">Save</button>>
     </form>
 @endsection

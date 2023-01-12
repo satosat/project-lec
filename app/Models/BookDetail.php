@@ -12,11 +12,14 @@ class BookDetail extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'book_id',
         'description',
         'length',
+        'isbn',
         'publisher',
         'stock',
         'price',
+        'images',
     ];
 
     public $timestamps = false;

@@ -20,14 +20,9 @@ class BookDetailController extends Controller
         return view('admin.detail.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin-add');
     }
 
     /**
@@ -38,49 +33,47 @@ class BookDetailController extends Controller
      */
     public function store(Request $request)
     {
-
-        $id = Book::insert([
-            'title'=>$request->title,
-            'author'=>$request->author
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'publisher' => 'required',
+            'isbn' => 'required',
+            'length' => 'required',
+            'stock' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'book_cover' => 'required',
         ]);
 
-        $file = $request->file('images');
-        $fileName = time().'.'.$file->getClientOriginalExtension();
-        Storage::putFileAs('public/img', $file, $fileName);
+        DB::transaction(function () use ($validatedData) {
+            $book = Book::create([
+                'title' => $validatedData['title'],
+                'author' => $validatedData['author']
+            ]);
+            $file = $validatedData['book_cover'];
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            Storage::putFileAs('book_images', $file, $fileName);
 
-        BookDetail::insert([
-            'book_id' =>$id,
-            'description'=>$request->description,
-            'length'=>$request->length,
-            'publisher'=>$request->publisher,
-            'stock'=>$request->stock,
-            'price'=>$request->price,
-            'images'=>$fileName
-        ]);
+            BookDetail::create([
+                'book_id' => $book->id,
+                'description' => $validatedData['description'],
+                'isbn' => $validatedData['isbn'],
+                'length' => $validatedData['length'],
+                'publisher' => $validatedData['publisher'],
+                'stock' => $validatedData['stock'],
+                'price' => $validatedData['price'],
+                'images' => $fileName
+            ]);
+        });
 
-        return redirect(route('show book'));
+        return redirect(route('home'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('admin.detail.update', [
+            'book' => Book::findOrFail($id),
+        ]);
     }
 
     /**
@@ -92,44 +85,45 @@ class BookDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id_book = Book::where('id', $request->id)->update([
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'publisher' => 'required',
+            'isbn' => 'required',
+            'length' => 'required',
+            'stock' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
+
+        Book::where('id', $id)->update([
             'title' => $request->title,
             'author' => $request->author,
         ]);
 
-        if($request->hasFile('images')){
-            $p = BookDetail::where('book_id', $id)->first();
-            Storage::delete('public/img'.$p->image);
+        if ($request->hasFile('book_cover')) {
+            $book = BookDetail::where('book_id', $id)->first();
+            Storage::delete('book_images' . $book->image);
 
-            $file = $request->file('images');
-            $fileName = '.'.$file->getClientOriginalName();
-            Storage::putFileAs('public/img', $file, $fileName);
+            $file = $request->file('book_cover');
+            $fileName = time().'.' . $file->getClientOriginalName();
+            Storage::putFileAs('book_images', $file, $fileName);
 
-            BookDetail::where('book_id', $request->id)->update([
+            BookDetail::where('book_id', $id)->update([
                 'images' => $fileName
             ]);
         }
 
-        BookDetail::where('book_id', $request->id)->update([
-            'book_id'=> $id_book,
-            'description'=>$request->description,
-            'length'=>$request->length,
-            'publisher'=>$request->publisher,
-            'stock'=>$request->stock,
-            'price'=>$request->price
+        BookDetail::where('book_id', $id)->update([
+            'book_id' => $id,
+            'description' => $request->description,
+            'isbn'=> $request->isbn,
+            'length' => $request->length,
+            'publisher' => $request->publisher,
+            'stock' => $request->stock,
+            'price' => $request->price
         ]);
 
-        return redirect(route('show book'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect(route('show book', ['id' => $id]));
     }
 }

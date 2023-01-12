@@ -5,7 +5,7 @@
 @section('content')
     <div class="container pt-5 d-flex justify-between">
         <div class="me-5">
-            <img src="{{ url('images/img.jpg') }}" alt="Book Cover" class="rounded" style="height: 30rem; width: 30rem;">
+            <img src="{{ asset('storage/book_images/' . $book->detail->images) }}" alt="Book Cover" class="rounded" style="height: 30rem; width: 30rem;">
         </div>
 
         <div class="d-flex flex-column justify-between">
@@ -21,7 +21,7 @@
                     @csrf
                     <input type="hidden" name="book_id" id="book_id" value="{{ $book->id }}">
                     <input type="submit" class="btn btn-primary w-100" id="bookmarkBtn"
-                        value="{{ $bookmarked }}"></input>
+                        value="{{ $bookmarked }}"/>
                 </form>
 
                 @if ($book->detail->stock != 0)
@@ -36,7 +36,10 @@
 
             {{-- Admin only --}}
             @can('admin')
-                <form action="{{ route('delete book', ['id' => $book->id]) }}" method="POST" class="mt-5">
+                <a href="{{ route('update', ['id' => $book->id]) }}" class="mt-5 mb-3">
+                    <button type="button" class="btn btn-secondary w-100">Update Book</button>
+                </a>
+                <form action="{{ route('delete book', ['id' => $book->id]) }}" method="POST" >
                     @csrf
                     @method('delete')
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('description', 512);
             $table->integer('length');
             $table->string('publisher');
+            $table->string('isbn');
             $table->integer('stock');
             $table->integer('price');
             $table->string('images');
