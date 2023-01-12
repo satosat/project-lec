@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Redis;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +46,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-    
+
     }
 
     /**
@@ -52,12 +57,20 @@ class BookController extends Controller
      */
     public function show($id)
     {
+        $isBookmarked = Bookmark::where([
+            ['user_id', Auth::id()],
+            ['book_id', $id]
+        ])->get();
+
+        $bookmarkedText = "Add to Bookmark";
+
+        if (count($isBookmarked)) {
+            $bookmarkedText = "Remove from Bookmark";
+        }
+
         return view('books.show', [
             'book' => Book::findOrFail($id),
-            'bookmarked' => Bookmark::where([
-                ['user_id', Auth::id()],
-                ['book_id', $id]
-            ])->get(),
+            'bookmarked' => $bookmarkedText,
         ]);
     }
 

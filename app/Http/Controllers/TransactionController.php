@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,18 +22,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = DB::table('transactions')->get();
-        return view('history.index', compact('transactions'));
-    }
+        $transactions = Transaction::where('user_id', Auth::id())->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('history.index', compact('transactions'));
     }
 
     /**
@@ -37,58 +35,23 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'book_id' => ['required', 'numeric', 'min:0'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $book = Book::findOrFail($id);
+        // Check if book exist
+        $book = Book::findOrFail($request->book_id);
 
-        // Abort if stock is zero (illegal route)
-        if (!$book->detail->stock) {
+        if ($book->detail->stock === 0) {
             abort(404);
         }
 
-        return $book->detail->stock;
-    }
+        Transaction::create([
+            'user_id' => Auth::id(),
+            'book_id' => $request->book_id,
+            'price' => $book->detail->price,
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect(route('history'));
     }
 }

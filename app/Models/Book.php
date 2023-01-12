@@ -20,4 +20,9 @@ class Book extends Model
     {
         return $this->hasOne(BookDetail::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
