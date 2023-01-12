@@ -41,12 +41,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::insert([
-            'title'=>$request->title,
-            'author'=>$request->author
-        ]);
-
-        return redirect('admin.detail.index');
+    
     }
 
     /**
